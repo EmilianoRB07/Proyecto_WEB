@@ -119,6 +119,11 @@ body {
     transform: scale(0.97);
 }
 
+#img2 img {
+  height: 35px;
+  width: auto;
+}
+
 .footer {
     display: flex;
     justify-content: space-between;
