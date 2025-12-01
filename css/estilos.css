@@ -111,6 +111,11 @@ footer a {
   width: auto;
 }
 
+#img2 img{
+  height: 35px;
+  width: auto;
+}
+
 .modal-header.guinda {
   background: var(--grad-guinda);
   color: #fff;
