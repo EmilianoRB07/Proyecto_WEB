@@ -283,6 +283,25 @@ footer a {
 }
 
 @media (max-width: 768px) {
+  .navbar-brand img{
+    max-height: 35px;
+  }
+
+  .navbar-nav {
+    background: var(--grad-guinda);
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .navbar-collapse {
+    text-align: center;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 10px 0;
+    font-size: 1.1rem;
+  }
+  
   .slide-multiple {
     flex-direction: column;
   }
