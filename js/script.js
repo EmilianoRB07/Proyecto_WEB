@@ -1,5 +1,5 @@
 const regex = {
-    texto: /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/,
+    texto: /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s]+$/,
     curp: /^[A-Z]{4}\d{6}[A-Z]{6}[A-Z0-9]{2}$/,
     telefono: /^\d{10}$/,
     cp: /^\d{5}$/,
