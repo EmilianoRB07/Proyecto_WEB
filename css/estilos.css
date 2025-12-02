@@ -246,7 +246,6 @@ footer a {
     justify-content: center;
   }
 
-  /* CARRUSEL */
   .carousel-container {
     width: 100%;
     margin: 0;
@@ -254,14 +253,12 @@ footer a {
     overflow: hidden;
   }
 
-  /* 🟢 ALTURA CORRECTA — evita huecos */
   .carousel-item {
-    height: 65vh;          /* ANTES 110vh */
+    height: 65vh;         
     min-height: 340px;
     position: relative;
   }
 
-  /* 🟢 IMAGEN COMPLETA — sin bordes blancos */
   .carousel-item > a img {
     width: 100% !important; 
     height: 100% !important;
@@ -269,7 +266,6 @@ footer a {
     display: block;
   }
 
-  /* 🟢 CAPTION más proporcionado */
   .carousel-caption {
     bottom: 8%;
     width: 85%;
@@ -277,11 +273,10 @@ footer a {
     border-radius: 12px;
   }
 
-  /* SLIDE FACEBOOK + VIDEO */
   .slide-facebook-video {
-    height: auto;              /* ANTES 70vh */
+    height: auto;            
     display: flex;
-    flex-direction: column;    /* ANTES en fila */
+    flex-direction: column;   
     gap: 15px;
     padding: 15px;
   }
@@ -295,7 +290,7 @@ footer a {
   .slide-facebook iframe,
   .video-youtube iframe {
     width: 100%;
-    height: 250px;             /* PERFECTO PARA CELULAR */
+    height: 250px;             
     border-radius: 10px;
   }
 }
