@@ -295,18 +295,16 @@ footer a {
 
   }
 
-  .navbar-collapse {
-    padding: 8px 0;
-    background: var(--grad-guinda);
+  .navbar-nav {
+    background: transparent !important;
+    padding: 0 !important;
   }
 
-  .navbar-nav .nav-link {
-    padding: 6px 0 !important;
-    font-size: 0.95rem !important;
-  }
-
-  .navbar-collapse.show {
-    margin-top: 4px;
+  .navbar-nav .nav-link{
+  padding: 12px 0 !important;
+  font-size: 1rem !important;
+  width: 100%;
+  text-align: center;
   }
 
   .slide-multiple {
