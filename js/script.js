@@ -10,6 +10,8 @@ const regex = {
 
 function validaCampo(id, pattern) {
     const input = document.getElementById(id);
+    if (!input) return false;
+
     const valido = pattern.test(input.value.trim());
     input.classList.toggle("is-invalid", !valido);
     return valido;
@@ -17,6 +19,8 @@ function validaCampo(id, pattern) {
 
 function validaSelect(id) {
     const sel = document.getElementById(id);
+    if (!sel) return false;
+
     const valido = sel.value !== "";
     sel.classList.toggle("is-invalid", !valido);
     return valido;
@@ -25,17 +29,21 @@ function validaSelect(id) {
 function guardarDatos() {
     const campos = document.querySelectorAll("input, select");
     let datos = {};
-    campos.forEach(campo => datos[campo.id] = campo.value);
+
+    campos.forEach(campo => {
+        if (campo.id) datos[campo.id] = campo.value;
+    });
+
     localStorage.setItem("datosCENDI", JSON.stringify(datos));
 }
 
 function cargarDatos() {
     const datos = JSON.parse(localStorage.getItem("datosCENDI"));
     if (!datos) return;
+
     Object.keys(datos).forEach(id => {
-        if (document.getElementById(id)) {
-            document.getElementById(id).value = datos[id];
-        }
+        const campo = document.getElementById(id);
+        if (campo) campo.value = datos[id];
     });
 }
 
@@ -57,8 +65,13 @@ function validarFormularioMenor() {
     valido &&= validaSelect("entidad-m");
     valido &&= validaSelect("alcaldia");
 
-    if (document.getElementById("alcaldia").value === "otro") {
+    const alcaldia = document.getElementById("alcaldia").value;
+
+    if (alcaldia === "otro") {
         valido &&= validaCampo("municipio-otro", regex.texto);
+    } else {
+        // Evita invalidez oculta
+        document.getElementById("municipio-otro").classList.remove("is-invalid");
     }
 
     valido &&= validaCampo("cp-m", regex.cp);
@@ -98,6 +111,7 @@ function mostrarTrabajador() {
     }
     document.getElementById("formMenor").style.display = "none";
     document.getElementById("formTrabajador").style.display = "block";
+
     localStorage.setItem("formActual", "trabajador");
     guardarDatos();
 }
@@ -105,80 +119,94 @@ function mostrarTrabajador() {
 function mostrarMenor() {
     document.getElementById("formTrabajador").style.display = "none";
     document.getElementById("formMenor").style.display = "block";
+
     localStorage.setItem("formActual", "menor");
     cargarDatos();
 }
 
 const toggleIcon = document.getElementById("togglePass");
-toggleIcon.addEventListener("click", () => {
-    const pass = document.getElementById("password-p");
-    pass.type = pass.type === "password" ? "text" : "password";
-    toggleIcon.classList.toggle("bi-eye-slash-fill");
-});
+if (toggleIcon) {
+    toggleIcon.addEventListener("click", () => {
+        const pass = document.getElementById("password-p");
+        pass.type = pass.type === "password" ? "text" : "password";
+        toggleIcon.classList.toggle("bi-eye-slash-fill");
+    });
+}
 
 const form = document.getElementById("formCompleto");
-const resetBtn = form.querySelector('button[type="reset"]');
 
-resetBtn.addEventListener("click", e => {
-    e.preventDefault();
-    form.reset();
-    localStorage.removeItem("datosCENDI");
-    localStorage.removeItem("formActual");
-    document.getElementById("formTrabajador").style.display = "none";
-    document.getElementById("formMenor").style.display = "block";
-    const alerta = document.getElementById("alerta-exito");
-    if (alerta) alerta.classList.add("d-none");
-    document.querySelectorAll(".is-invalid").forEach(el => el.classList.remove("is-invalid"));
-});
+if (form) {
+    const resetBtn = form.querySelector('button[type="reset"]');
 
-form.addEventListener("submit", e => {
-    e.preventDefault();
+    if (resetBtn) {
+        resetBtn.addEventListener("click", e => {
+            e.preventDefault();
+            form.reset();
+            localStorage.removeItem("datosCENDI");
+            localStorage.removeItem("formActual");
 
-    if (!validarFormularioMenor()) {
-        mostrarMenor();
-        alert("Corrige los datos del menor.");
-        return;
+            document.getElementById("formTrabajador").style.display = "none";
+            document.getElementById("formMenor").style.display = "block";
+
+            const alerta = document.getElementById("alerta-exito");
+            if (alerta) alerta.classList.add("d-none");
+
+            document.querySelectorAll(".is-invalid")
+                .forEach(el => el.classList.remove("is-invalid"));
+        });
     }
 
-    if (!validarFormularioTrabajador()) {
-        mostrarTrabajador();
-        return;
-    }
+    form.addEventListener("submit", e => {
+        e.preventDefault();
 
-    guardarDatos();
+        if (!validarFormularioMenor()) {
+            mostrarMenor();
+            alert("Corrige los datos del menor.");
+            return;
+        }
 
-    const contenido = `
-    <h5> Hola ${document.getElementById("nombre-t").value}, verifica que los datos que ingresaste sean correctos:</h5>
-      <h6>Datos del menor</h6>
-      <ul>
-        <li><strong>Nombre:</strong> ${document.getElementById("nombre-m").value}</li>
-        <li><strong>Apellidos:</strong> ${document.getElementById("apP-m").value} ${document.getElementById("apM-m").value}</li>
-        <li><strong>CURP:</strong> ${document.getElementById("curp-m").value}</li>
-        <li><strong>Género:</strong> ${document.getElementById("genero-m").value}</li>
-        <li><strong>Fecha nacimiento:</strong> ${document.getElementById("FN-m").value}</li>
-      </ul>
+        if (!validarFormularioTrabajador()) {
+            mostrarTrabajador();
+            return;
+        }
 
-      <h6 class="mt-3">Datos del trabajador</h6>
-      <ul>
-        <li><strong>Nombre:</strong> ${document.getElementById("nombre-t").value}</li>
-        <li><strong>Apellidos:</strong> ${document.getElementById("apP-t").value} ${document.getElementById("apM-t").value}</li>
-        <li><strong>CURP:</strong> ${document.getElementById("curp-t").value}</li>
-        <li><strong>Correo institucional:</strong> ${document.getElementById("correo-i").value}</li>
-        <li><strong>Género:</strong> ${document.getElementById("genero-t").value}</li>
-        <li><strong>Número de empleado:</strong> ${document.getElementById("num_empleado").value}</li>
-      </ul>
-    `;
+        guardarDatos();
 
-    document.getElementById("contenidoModal").innerHTML = contenido;
-    new bootstrap.Modal(document.getElementById("modalDatos")).show();
-});
+        const contenido = `
+        <h5>Hola ${document.getElementById("nombre-t").value}, verifica que los datos sean correctos:</h5>
 
-document.getElementById("modalDatos").addEventListener("hidden.bs.modal", () => {
-    document.getElementById("alerta-exito").classList.remove("d-none");
-});
+        <h6>Datos del menor</h6>
+        <ul>
+          <li><strong>Nombre:</strong> ${document.getElementById("nombre-m").value}</li>
+          <li><strong>Apellidos:</strong> ${document.getElementById("apP-m").value} ${document.getElementById("apM-m").value}</li>
+          <li><strong>CURP:</strong> ${document.getElementById("curp-m").value}</li>
+          <li><strong>Género:</strong> ${document.getElementById("genero-m").value}</li>
+          <li><strong>Fecha nacimiento:</strong> ${document.getElementById("FN-m").value}</li>
+        </ul>
+
+        <h6 class="mt-3">Datos del trabajador</h6>
+        <ul>
+          <li><strong>Nombre:</strong> ${document.getElementById("nombre-t").value}</li>
+          <li><strong>Apellidos:</strong> ${document.getElementById("apP-t").value} ${document.getElementById("apM-t").value}</li>
+          <li><strong>CURP:</strong> ${document.getElementById("curp-t").value}</li>
+          <li><strong>Correo institucional:</strong> ${document.getElementById("correo-i").value}</li>
+          <li><strong>Género:</strong> ${document.getElementById("genero-t").value}</li>
+          <li><strong>Número de empleado:</strong> ${document.getElementById("num_empleado").value}</li>
+        </ul>
+      `;
+
+        document.getElementById("contenidoModal").innerHTML = contenido;
+        new bootstrap.Modal(document.getElementById("modalDatos")).show();
+    });
+
+    document.getElementById("modalDatos").addEventListener("hidden.bs.modal", () => {
+        document.getElementById("alerta-exito").classList.remove("d-none");
+    });
+}
 
 window.onload = () => {
     cargarDatos();
+
     if (localStorage.getItem("formActual") === "trabajador") {
         mostrarTrabajador();
     }

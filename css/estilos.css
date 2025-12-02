@@ -1,14 +1,11 @@
 :root {
-  --grad-guinda: linear-gradient(180deg,
-      #4b0018 0%,
-      #6a0026 50%,
-      #8b0033 100%);
-  --grad-guinda-hover: linear-gradient(180deg,
-      #6a0026 0%,
-      #8b0033 50%,
-      #a40042 100%);
+  --grad-guinda: linear-gradient(180deg, #4b0018 0%, #6a0026 50%, #8b0033 100%);
+  --grad-guinda-hover: linear-gradient(180deg, #6a0026 0%, #8b0033 50%, #a40042 100%);
 }
 
+/* ===========================
+   GENERAL
+=========================== */
 body {
   min-height: 100vh;
   display: flex;
@@ -17,7 +14,6 @@ body {
   z-index: 1;
   background-color: #f8f9fa;
 }
-
 
 body::before {
   content: '';
@@ -31,6 +27,9 @@ body::before {
   z-index: -1;
 }
 
+/* ===========================
+   NAVBAR
+=========================== */
 .navbar.bg-guinda {
   background: var(--grad-guinda) !important;
 }
@@ -62,6 +61,9 @@ body::before {
   margin-left: 15px;
 }
 
+/* ===========================
+   BOTONES
+=========================== */
 .btn {
   background: var(--grad-guinda);
   color: #fff;
@@ -83,12 +85,9 @@ body::before {
   transform: scale(0.97);
 }
 
-main {
-  flex: 1;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
+/* ===========================
+   FOOTER
+=========================== */
 footer {
   background: var(--grad-guinda);
   color: #fff;
@@ -103,21 +102,22 @@ footer a {
   color: #f8f9fa;
 }
 
-#img1 img {
+#img1 img, #img2 img {
   height: 35px;
   width: auto;
 }
 
-#img2 img {
-  height: 35px;
-  width: auto;
-}
-
+/* ===========================
+   MODAL
+=========================== */
 .modal-header.guinda {
   background: var(--grad-guinda);
   color: #fff;
 }
 
+/* ===========================
+   CAROUSEL – ORIGINAL SIZE
+=========================== */
 .carousel-container {
   width: 80%;
   margin: 20px auto;
@@ -140,13 +140,15 @@ footer a {
   height: 100%;
 }
 
+/* ===========================
+   SLIDE MULTIPLE / TARJETAS
+=========================== */
 .slide-multiple {
   display: flex;
   height: 100%;
 }
 
-.slide-left,
-.slide-right {
+.slide-left, .slide-right {
   height: 100%;
 }
 
@@ -158,7 +160,6 @@ footer a {
 
 .slide-left .card {
   height: 100%;
-  background-color: white;
 }
 
 .slide-left .card-img-top {
@@ -178,21 +179,16 @@ footer a {
 
 .slide-right .card {
   height: 100%;
-  background-color: white;
 }
 
 .slide-right .card-img-top {
   height: 200px;
-  width: 100%;
   object-fit: cover;
 }
 
-.slide-right .card-body,
-.slide-left .card-body {
-  text-align: center;
-  padding: 10px;
-}
-
+/* ===========================
+   FACEBOOK + VIDEO + NOTICIA
+=========================== */
 .slide-facebook-video {
   display: flex;
   height: 100%;
@@ -202,7 +198,6 @@ footer a {
 
 .slide-facebook {
   width: 40%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -216,18 +211,9 @@ footer a {
 
 .slide-video-noticia {
   width: 60%;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 20px;
-}
-
-.video-youtube {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .video-youtube iframe {
@@ -236,37 +222,18 @@ footer a {
   border-radius: 10px;
 }
 
-.noticia-escom {
-  flex: 1;
-}
-
 .noticia-escom .card {
-  width: 100%;
   height: 100%;
-  background-color: white;
 }
 
 .noticia-escom .card-img-top {
   height: 250px;
   object-fit: cover;
-  width: 100%;
 }
 
-.card {
-  border: none;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: white;
-}
-
-.card-body h5 {
-  font-size: 1.1rem;
-}
-
-.card-body p {
-  font-size: 0.9rem;
-}
-
+/* ===========================
+   CAROUSEL CONTROLS
+=========================== */
 .carousel-control-prev,
 .carousel-control-next {
   width: 5%;
@@ -279,8 +246,13 @@ footer a {
   border-radius: 50%;
 }
 
+/* ===========================
+   RESPONSIVE
+=========================== */
 @media (max-width: 768px) {
-  .navbar{
+
+  /* Navbar compacto */
+  .navbar {
     padding-top: 4px !important;
     padding-bottom: 4px !important;
   }
@@ -292,7 +264,6 @@ footer a {
   .navbar-toggler {
     padding: 4px 6px !important;
     font-size: 0.9rem !important;
-
   }
 
   .navbar-nav {
@@ -300,23 +271,27 @@ footer a {
     padding: 0 !important;
   }
 
-  .navbar-nav .nav-link{
-  padding: 12px 0 !important;
-  font-size: 1rem !important;
-  width: 100%;
-  text-align: center;
+  .navbar-nav .nav-link {
+    padding: 12px 0 !important;
+    font-size: 1rem !important;
+    width: 100%;
+    text-align: right;
   }
 
+  /* Carrusel autoajustado en móvil */
+  .carousel-inner,
+  .carousel-item {
+    height: auto;
+  }
+
+  /* Slides */
   .slide-multiple {
     flex-direction: column;
   }
 
-  .slide-left,
-  .slide-right,
-  .slide-facebook,
-  .slide-video-noticia {
-    width: 100%;
+  .slide-left, .slide-right, .slide-facebook, .slide-video-noticia {
     max-width: 100%;
+    width: 100%;
   }
 
   .slide-right {
