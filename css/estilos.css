@@ -233,7 +233,6 @@ footer a {
 ============================== */
 @media (max-width: 768px) {
 
-  /* NAVBAR */
   .navbar-nav {
     flex-direction: column !important;
     width: 100%;
@@ -242,8 +241,13 @@ footer a {
     text-align: center;
   }
 
+  .navbar-nav .nav-item {
+    width: 100%;
+  }
+
   .navbar-nav .nav-link {
     justify-content: center;
+    width: 100%;
   }
 
   .carousel-container {
@@ -254,47 +258,36 @@ footer a {
   }
 
   .carousel-item {
-    height: 65vh;         
-    min-height: 340px;
+    height: 110vh;
+    min-height: 420px;
     position: relative;
   }
 
-  .carousel-item > a img {
-    width: 100% !important; 
-    height: 100% !important;
-    object-fit: cover !important;
+  .carousel-item>a img {
+    width: 70%;
+    height: 95%;
+    object-fit: cover;
     display: block;
   }
 
   .carousel-caption {
-    bottom: 8%;
-    width: 85%;
-    padding: 1rem;
-    border-radius: 12px;
+    bottom: 10%;
+    width: 70%;
+    padding: 1.3rem;
   }
 
   .slide-facebook-video {
-    height: auto;            
+    height: 70vh;
     display: flex;
-    flex-direction: column;   
-    gap: 15px;
-    padding: 15px;
+    padding: 20px;
+    gap: 20px;
   }
 
   .slide-facebook,
   .slide-video-noticia {
-    width: 100%;
-    height: auto;
-  }
-
-  .slide-facebook iframe,
-  .video-youtube iframe {
-    width: 100%;
-    height: 250px;             
-    border-radius: 10px;
+    height: 100%;
   }
 }
-
 
 
 @media (min-width: 768px) and (max-width:1080px) {
