@@ -21,7 +21,7 @@ body::before {
 .navbar.bg-primary,
 .navbar.bg-guinda {
   background: linear-gradient(180deg, #4b0018 0%, #6a0026 50%, #8b0033 100%) !important;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 .navbar-brand img {
@@ -42,7 +42,7 @@ body::before {
 }
 
 .navbar-toggler {
-  border-color: rgba(255,255,255,0.4) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
 .team-logo {
@@ -96,7 +96,7 @@ footer a {
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 50%;
 }
 
@@ -105,7 +105,7 @@ footer a {
   border-radius: 12px;
   background: white;
   overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card-img-top {
@@ -245,36 +245,135 @@ footer a {
 
   .carousel-container {
     width: 100%;
-    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
   }
 
-  .carousel-inner,
   .carousel-item {
-    height: auto;
+    height: 110vh;
+    min-height: 420px;
+    position: relative;
   }
 
-  .carousel-item img {
-    height: auto;
+  .carousel-item>a img {
+    width: 70%;
+    height: 95%;
+    object-fit: cover;
+    display: block;
   }
 
-  .slide-multiple {
-    flex-direction: column;
+  .carousel-caption {
+    bottom: 10%;
+    width: 70%;
+    padding: 1.3rem;
+
+    background: rgba(20, 0, 20, 0.35);
+    backdrop-filter: blur(10px) saturate(160%);
+    -webkit-backdrop-filter: blur(10px) saturate(160%);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    animation: fadeUp 0.5s ease-out;
   }
 
-  .slide-left,
-  .slide-right {
-    max-width: 100%;
+  .carousel-caption h5 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.45);
+  }
+
+  .carousel-caption p {
+    font-size: 1.2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .slide-facebook-video {
-    flex-direction: column;
-    height: auto;
+    height: 70vh;
+    display: flex;
+    padding: 20px;
+    gap: 20px;
   }
 
   .slide-facebook,
   .slide-video-noticia {
-    width: 100%;
+    height: 100%;
   }
+
+  .slide-facebook iframe,
+  .video-youtube iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: 50%;
+  }
+
+
+  @media (min-width: 768px) {
+
+    .carousel-item {
+      height: 90vh;
+      min-height: 500px;
+    }
+
+    .carousel-item>a img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .carousel-caption {
+      width: 90%;
+      bottom: 8%;
+      padding: 1.1rem 1.2rem;
+    }
+
+    .carousel-caption h5 {
+      font-size: 1.5rem;
+    }
+
+    .carousel-caption p {
+      font-size: 1.05rem;
+    }
+
+    .slide-facebook-video {
+      height: 70vh;
+      display: flex;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .slide-facebook {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide-video-noticia {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      height: 100%;
+    }
+  }
+
 
   footer {
     flex-direction: column;
