@@ -227,11 +227,7 @@ footer a {
   background: #8b0033 !important;
 }
 
-
-/* ==============================
-   📱 CELULAR — max-width:768px
-============================== */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 
   .navbar-nav {
     flex-direction: column !important;
