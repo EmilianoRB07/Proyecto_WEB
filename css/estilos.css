@@ -1,54 +1,30 @@
 :root {
-  --grad-guinda: linear-gradient(180deg, #4b0018 0%, #6a0026 50%, #8b0033 100%);
-  --grad-guinda-hover: linear-gradient(180deg, #6a0026 0%, #8b0033 50%, #a40042 100%);
+  --guinda1: #4b0018;
+  --guinda2: #6a0026;
+  --guinda3: #8b0033;
+
+  --grad-guinda: linear-gradient(180deg, var(--guinda1), var(--guinda2), var(--guinda3));
+
+  --text-light: #ffffff;
+  --bg-body: #f5f5f5;
 }
 
-/* ===========================
-   GENERAL
-=========================== */
 body {
-  min-height: 100vh;
+  background-color: var(--bg-body);
   display: flex;
   flex-direction: column;
-  position: relative;
-  z-index: 1;
-  background-color: #f8f9fa;
+  min-height: 100vh;
+  margin: 0;
 }
 
-body::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-repeat: repeat;
-  opacity: 0.3;
-  z-index: -1;
-}
-
-/* ===========================
-   NAVBAR
-=========================== */
 .navbar.bg-guinda {
   background: var(--grad-guinda) !important;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 .navbar-brand img {
   max-height: 45px;
-  object-fit: contain;
-}
-
-.navbar-nav .nav-link {
-  display: flex;
-  align-items: center;
-  color: white !important;
-  font-size: 1rem;
-}
-
-.navbar-nav .nav-link i {
-  font-size: 1.2rem;
-  margin-right: 6px;
 }
 
 .team-logo {
@@ -57,147 +33,91 @@ body::before {
   object-fit: contain;
 }
 
-.navbar-nav.flex-row .nav-item {
-  margin-left: 15px;
-}
-
-/* ===========================
-   BOTONES
-=========================== */
-.btn {
-  background: var(--grad-guinda);
-  color: #fff;
-  padding: 10px 22px;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: 0.25s ease-in-out;
-}
-
-.btn:hover {
-  background: var(--grad-guinda-hover);
-  transform: translateY(-2px);
-}
-
-.btn:active {
-  transform: scale(0.97);
-}
-
-/* ===========================
-   FOOTER
-=========================== */
-footer {
-  background: var(--grad-guinda);
-  color: #fff;
-  padding: 1rem 0;
+.navbar-nav .nav-link {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 20px;
+  color: var(--text-light) !important;
+  font-size: 1rem;
 }
 
-footer a {
-  color: #f8f9fa;
+.navbar-nav .nav-link i {
+  font-size: 1.2rem;
+  margin-right: 6px;
 }
 
-#img1 img, #img2 img {
-  height: 35px;
-  width: auto;
+@media (max-width: 768px) {
+
+  .navbar {
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+  }
+
+  .navbar-brand img {
+    max-height: 28px !important;
+  }
+
+  .team-logo {
+    height: 32px;
+    width: 32px;
+  }
+
+  .navbar-toggler {
+    padding: 3px 6px !important;
+    font-size: 0.9rem;
+  }
+
+  .navbar-collapse {
+    padding: 10px 0;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .navbar-nav {
+    width: 100%;
+    flex-direction: column !important;
+  }
+
+  .navbar-nav .nav-link {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0 !important;
+    font-size: 1rem;
+  }
 }
 
-/* ===========================
-   MODAL
-=========================== */
-.modal-header.guinda {
-  background: var(--grad-guinda);
-  color: #fff;
-}
-
-/* ===========================
-   CAROUSEL – ORIGINAL SIZE
-=========================== */
 .carousel-container {
-  width: 80%;
+  width: 85%;
+  max-width: 1200px;
   margin: 20px auto;
-  max-height: 670px;
+  border-radius: 10px;
   overflow: hidden;
-  position: relative;
 }
 
 .carousel-inner {
-  height: 670px;
-}
-
-.carousel-item {
-  height: 670px;
+  max-height: 650px;
 }
 
 .carousel-item img {
-  object-fit: cover;
   width: 100%;
-  height: 100%;
-}
-
-/* ===========================
-   SLIDE MULTIPLE / TARJETAS
-=========================== */
-.slide-multiple {
-  display: flex;
-  height: 100%;
-}
-
-.slide-left, .slide-right {
-  height: 100%;
-}
-
-.slide-left {
-  flex: 1;
-  max-width: 50%;
-  padding: 10px;
-}
-
-.slide-left .card {
-  height: 100%;
-}
-
-.slide-left .card-img-top {
-  height: 400px;
+  height: 650px;
   object-fit: cover;
 }
 
-.slide-right {
-  flex: 1;
-  max-width: 50%;
-  padding: 10px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 10px;
+.carousel-caption {
+  font-size: 1rem;
 }
 
-.slide-right .card {
-  height: 100%;
-}
+/* ----------- SLIDE FACEBOOK + YOUTUBE ----------- */
 
-.slide-right .card-img-top {
-  height: 200px;
-  object-fit: cover;
-}
-
-/* ===========================
-   FACEBOOK + VIDEO + NOTICIA
-=========================== */
 .slide-facebook-video {
   display: flex;
-  height: 100%;
   gap: 20px;
-  padding: 20px;
+  height: 450px;
 }
 
+/* --- Columna izquierda (Facebook) --- */
 .slide-facebook {
-  width: 40%;
+  flex: 1;
+  max-width: 40%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -209,101 +129,74 @@ footer a {
   border-radius: 10px;
 }
 
+/* --- Columna derecha (YouTube + Tarjeta) --- */
 .slide-video-noticia {
-  width: 60%;
+  flex: 1;
+  max-width: 60%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 
+/* Video Youtube */
 .video-youtube iframe {
   width: 100%;
-  height: 100%;
+  height: 210px;
   border-radius: 10px;
 }
 
-.noticia-escom .card {
-  height: 100%;
-}
-
+/* Tarjeta ESCOM */
 .noticia-escom .card-img-top {
-  height: 250px;
+  height: 200px;
   object-fit: cover;
 }
-
-/* ===========================
-   CAROUSEL CONTROLS
-=========================== */
-.carousel-control-prev,
-.carousel-control-next {
-  width: 5%;
-  height: 100%;
+footer {
+  background: var(--grad-guinda);
+  color: var(--text-light);
+  padding: 15px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 50%;
+footer img {
+  height: 35px;
+  object-fit: contain;
 }
 
-/* ===========================
-   RESPONSIVE
-=========================== */
+footer .container p {
+  margin: 0;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
 @media (max-width: 768px) {
-
-  /* Navbar compacto */
-  .navbar {
-    padding-top: 4px !important;
-    padding-bottom: 4px !important;
-  }
-
-  .navbar-brand img {
-    max-height: 28px !important;
-  }
-
-  .navbar-toggler {
-    padding: 4px 6px !important;
-    font-size: 0.9rem !important;
-  }
-
-  .navbar-nav {
-    background: transparent !important;
-    padding: 0 !important;
-  }
-
-  .navbar-nav .nav-link {
-    padding: 12px 0 !important;
-    font-size: 1rem !important;
-    width: 100%;
-    text-align: right;
-  }
-
-  /* Carrusel autoajustado en móvil */
-  .carousel-inner,
-  .carousel-item {
-    height: auto;
-  }
-
-  /* Slides */
-  .slide-multiple {
+  footer {
     flex-direction: column;
-  }
-
-  .slide-left, .slide-right, .slide-facebook, .slide-video-noticia {
-    max-width: 100%;
-    width: 100%;
-  }
-
-  .slide-right {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .slide-facebook-video {
-    flex-direction: column;
+    text-align: center;
     gap: 10px;
   }
 
-  .slide-video-noticia {
-    flex-direction: column;
+  footer img {
+    height: 32px;
   }
+}
+
+.card {
+  border: none;
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-body {
+  text-align: center;
+  padding: 12px;
+}
+
+.card-body p {
+  font-size: 0.9rem;
+  margin: 0;
 }
