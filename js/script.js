@@ -253,3 +253,21 @@ window.onload = function () {
 };
 
 document.addEventListener("input", guardarDatos);
+
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("bienvenidaus");
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        window.location.href = "bienvenida_usuario.html"; 
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("loginAdmin");
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        window.location.href = "bienvenida_admin.html"; 
+    });
+});
