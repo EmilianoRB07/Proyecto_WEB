@@ -91,6 +91,7 @@ function validarFormularioMenor() {
     if (!validaCampo("telefono-m", regex.telefono)) ok = false;
 
     if (!validaSelect("grupo-m")) ok = false;
+    if (!validaSelect("cendi-m")) ok = false;
 
     return ok;
 }
@@ -113,7 +114,7 @@ function validarFormularioTrabajador() {
     if (!validaSelect("genero-t")) ok = false;
     if (!validaCampo("correo-i", regex.correoIPN)) ok = false;
     if (!validaCampo("correo-p", regex.correoGmail)) ok = false;
-    if (!validaCampo("num_empleado", /^[0-9]{1,10}$/)) ok = false;
+    if (!validaCampo("num_empleado", /^[0-9]{4,7}$/)) ok = false;
 
     if (!validaSelect("estado_civil")) ok = false;
     if (!validaSelect("ocupacion")) ok = false;
@@ -216,6 +217,7 @@ if (form) {
                 <li><strong>Teléfono:</strong> ${document.getElementById("telefono-m").value}</li>
                 <li><strong>Grupo Sanguíneo:</strong> ${document.getElementById("GS-m").value}</li>
                 <li><strong>RH:</strong> ${document.getElementById("rh-m").value}</li>
+                <li><strong>CENDI:</strong> ${document.getElementById("cendi-m").value}</li>
             </ul>
 
             <h6 class="mt-3">Datos del trabajador</h6>
