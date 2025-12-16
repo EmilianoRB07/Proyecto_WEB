@@ -90,22 +90,26 @@
 
                 <div class="col-md-8">
                   <label for="curp-m" class="form-label">CURP</label>
-                  <input type="text" id="curp-m" maxlength="18" class="form-control" required
-                    placeholder="SOLO LETRAS MAYUSCULAS">
+                  <input type="text" id="curp-m" maxlength="18" class="form-control" style="text-transform: uppercase;"
+                    required placeholder="SOLO LETRAS MAYUSCULAS">
                 </div>
 
                 <div class="col-md-4">
                   <label for="GS-m" class="form-label">Grupo sanguíneo</label>
-                  <input type="text" id="GS-m" class="form-control" required>
-                </div>
-
-                <div class="col-md-4">
-                  <label for="rh-m" class="form-label">RH</label>
-                  <select id="rh-m" class="form-select" required>
+                  <select id="GS-m" class="form-select" required>
                     <option value="">Seleccione…</option>
-                    <option>Positivo</option>
-                    <option>Negativo</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
                   </select>
+                  <div class="invalid-feedback">
+                    Seleccione un grupo sanguineo valido.
+                  </div>
                 </div>
 
                 <div class="col-md-6">
@@ -204,27 +208,21 @@
                 </div>
 
                 <div class="col-md-6">
-                  <label for="grupo-m" class="form-label">Grupo</label>
-                  <select id="grupo-m" class="form-select" required>
-                    <option value="">Seleccione...</option>
-                    <option>Lactantes I - II (0–12 meses)</option>
-                    <option>Maternal I (1 año 1 día – 2 años)</option>
-                    <option>Maternal II (2 años 1 día – 3 años)</option>
-                    <option>Preescolar I (3 años 1 día – 4 años)</option>
-                    <option>Preescolar II (4 años 1 día – 5 años)</option>
-                    <option>Preescolar III (5 años 1 día – 6 años)</option>
-                  </select>
+                  <label for="grupo-m-texto" class="form-label">Grupo</label>
+                  <input type="text" id="grupo-m-texto" class="form-control" value="Asignado automáticamente" readonly>
+                  <input type="hidden" id="grupo-m" name="grupo_m">
+                  <small class="text-muted">El grupo se asigna automáticamente según la edad del menor.</small>
                 </div>
 
                 <div class="col-md-6">
                   <label for="cendi-m" class="form-label">CENDI</label>
                   <select id="cendi-m" class="form-select" required>
                     <option value="">Seleccione...</option>
-                    <option>CENDI "ASC"</option>
-                    <option>CENDI "CBB"</option>
-                    <option>CENDI "ESLM"</option>
-                    <option>CENDI "LPB"</option>
-                    <option>CENDI "MSE"</option>
+                    <option>CENDI "Amalia Solórzano de Cardenas"</option>
+                    <option>CENDI "Clementina Batalla de Bassols"</option>
+                    <option>CENDI "Eva Samano de Lopez Mateos"</option>
+                    <option>CENDI "Laura Perez de Batiz"</option>
+                    <option>CENDI "Margarita Salazar de Erro"</option>
                   </select>
                 </div>
 
@@ -285,6 +283,19 @@
                 <div class="col-md-6">
                   <label for="correo-i" class="form-label">Correo institucional</label>
                   <input type="email" id="correo-i" class="form-control" placeholder="ejemplo@ipn.mx" required>
+                </div>
+
+                <div class="col-md-6 position-relative">
+                  <label for="password-p" class="form-label">Contraseña</label>
+                  <input type="password-p" id="password-p" class="form-control" required minlength="6"
+                    pattern="(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{6,}"
+                    title="Debe tener mínimo 6 caracteres, 1 mayúscula, 1 número y 1 símbolo">
+                  <i id="togglePass" class="bi bi-eye-fill position-absolute"
+                    style="top: 38px; right: 15px; cursor: pointer; z-index: 10;">
+                  </i>
+                  <div class="form-text">
+                    Mínimo 6 caracteres, 1 mayúscula, 1 número y 1 símbolo.
+                  </div>
                 </div>
 
                 <div class="col-md-6">
@@ -356,7 +367,7 @@
                   <button type="button" class="btn btn-secondary" onclick="mostrarMenor()">Regresar</button>
                   <div>
                     <button type="reset" class="btn btn-outline-secondary">Limpiar</button>
-                    <button type="submit" class="btn btn-primary">Registrar</button>
+                    <button type="submit" class="btn btn-primary">Verificar datos</button>
                   </div>
                 </div>
 
@@ -380,7 +391,8 @@
         <div class="modal-body" id="contenidoModal"></div>
 
         <div class="modal-footer">
-          <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Editar</button>
+          <button id="btnConfirmarRegistro" class="btn btn-success">Confirmar y Registrar</button>
         </div>
 
       </div>
@@ -404,7 +416,7 @@
     <div class="container text-center">
       <p class="mb-1">© 2025 Copyright TDAW - 4CM4 - Equipo 8</p>
     </div>
-    
+
     <div id="img2">
       <a href="https://www.ipn.mx/cocendi/" data-bs-toggle="tooltip">
         <img src="img/logoCENDI.png" alt="COCENDI LOGO" title="Pagina COCENDI">
@@ -415,22 +427,6 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    const selectAlcaldia = document.getElementById("alcaldia");
-    const campoOtro = document.getElementById("municipio-otro-container");
-    const inputOtro = document.getElementById("municipio-otro");
-
-    selectAlcaldia.addEventListener("change", () => {
-      if (selectAlcaldia.value === "otro") {
-        campoOtro.style.display = "block";
-        inputOtro.setAttribute("required", "true");
-      } else {
-        campoOtro.style.display = "none";
-        inputOtro.removeAttribute("required");
-        inputOtro.value = "";
-      }
-    });
-  </script>
   <script src="js/script.js"></script>
 
 </body>

@@ -52,6 +52,18 @@ body::before {
   border-radius: 50%;
 }
 
+#tbodySolicitudes .btn-outline-primary i {
+  color: #0d6efd; 
+}
+
+#tbodySolicitudes .btn-outline-danger i {
+  color: #dc3545;
+}
+
+#tbodySolicitudes .btn {
+  padding: 0.25rem 0.45rem;
+}
+
 footer {
   background: linear-gradient(180deg, #4b0018 0%, #6a0026 50%, #8b0033 100%);
   color: #fff;
