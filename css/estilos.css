@@ -29,6 +29,11 @@ body::before {
   object-fit: contain;
 }
 
+.navbar .container{
+  display: flex;
+  align-items: center;
+}
+
 .navbar-nav .nav-link {
   color: white !important;
   font-size: 1rem;
@@ -236,6 +241,7 @@ footer a {
   background: #8b0033 !important;
 }
 
+/*
 @media (max-width: 768px) {
 
   .navbar-nav {

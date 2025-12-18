@@ -1,5 +1,10 @@
 <?php
 header("Content-Type: application/json; charset=utf-8");
+session_set_cookie_params([
+  "path" => "/",     // importantísimo
+  "httponly" => true,
+  "samesite" => "Lax"
+]);
 session_start();
 
 if (!isset($_SESSION["trabajador_id"])) {

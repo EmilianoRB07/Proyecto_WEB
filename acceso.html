@@ -12,39 +12,54 @@
   <link rel="icon" href="img/logo_tiburon_mamado-removebg-preview.png" type="image/png">
 </head>
 
-<body>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-guinda shadow-sm">
-      <div class="container">
-        <a class="navbar-brand" href="index.html" data-bs-toggle="tooltip">
-          <img src="img/ipnblack.png" alt="IPN" title="Pagina IPN">
+<body class="bg-pattern">
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-guinda shadow-sm">
+    <div class="container">
+
+      <!-- IZQUIERDA: IPN (siempre) -->
+      <a class="navbar-brand" href="https://www.ipn.mx" data-bs-toggle="tooltip" title="Pagina IPN">
+        <img src="img/ipnblack.png" alt="IPN">
+      </a>
+
+      <!-- DERECHA en móvil: toggler + tibu (solo < lg) -->
+      <div class="d-flex align-items-center ms-auto gap-2 d-lg-none">
+        <a href="index.html" class="navbar-brand p-0" data-bs-toggle="tooltip" title="Index">
+          <img src="img/tibu.png" alt="Logo Equipo" class="team-logo rounded-circle">
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav"
+          aria-controls="menuNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-
-        <div class="collapse navbar-collapse" id="menuNav">
-          <ul class="navbar-nav ms-auto align-items-center flex-row">
-            <li class="nav-item"><a class="nav-link" href="index.html"><i
-                  class="bi bi-house-door-fill me-1"></i>Inicio</a></li>
-            <li class="nav-item"><a class="nav-link" href="inscripcion.html"><i
-                  class="bi bi-pencil-square me-1"></i>Inscripción</a></li>
-            <li class="nav-item"><a class="nav-link" href="admin.html"><i class="bi bi-gear-fill me-1"></i>Admin</a>
-            </li>
-            <li class="nav-item"><a class="nav-link active" href="acceso.html"><i
-                  class="bi bi-person me-1"></i>Acceso</a></li>
-            <li class="nav-item ms-3">
-              <a href="index.html" class="nav-link p-0" data-bs-toggle="tooltip">
-                <img src="img/tibu.png" alt="Logo Equipo" class="team-logo rounded-circle" title="Index">
-              </a>
-            </li>
-          </ul>
-        </div>
-
       </div>
-    </nav>
-  </header>
+
+      <!-- MENÚ (colapsa en móvil, visible en lg+) -->
+      <div class="collapse navbar-collapse" id="menuNav">
+        <ul class="navbar-nav mx-lg-auto align-items-lg-center flex-row gap-5 gap-lg-5">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html"><i class="bi bi-house-door-fill me-1"></i>Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="inscripcion.html"><i class="bi bi-pencil-square me-1"></i>Inscripción</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin.html"><i class="bi bi-gear-fill me-1"></i>Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="acceso.html"><i class="bi bi-person me-1"></i>Acceso</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- DERECHA en pantalla grande: Tibu (solo >= lg) -->
+      <a href="index.html" class="navbar-brand p-0 ms-lg-auto d-none d-lg-block" data-bs-toggle="tooltip" title="Index">
+        <img src="img/tibu.png" alt="Logo Equipo" class="team-logo rounded-circle">
+      </a>
+
+    </div>
+  </nav>
+</header>
 
   <main class="container my-5">
     <div class="row justify-content-center">
@@ -102,7 +117,7 @@
               <button id="btnCerrar" class="btn btn-outline-danger">
                 <i class="bi bi-box-arrow-right me-1"></i>Cerrar Sesión
               </button>
-              <a href="nuevo_menor.html" class="btn btn-primary">
+              <a href="nuevo_menor.php" class="btn btn-primary">
                 <i class="bi bi-plus-circle me-1"></i>Registrar otro menor
               </a>
             </div>

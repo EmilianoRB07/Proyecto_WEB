@@ -1,3 +1,19 @@
+<?php
+session_set_cookie_params([
+  "lifetime" => 0,
+  "path" => "/",        
+  "httponly" => true,
+  "samesite" => "Lax"
+]);
+session_start();
+
+if (!isset($_SESSION["trabajador_id"])) {
+  header("Location: acceso.html");
+  exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -13,8 +29,6 @@
 </head>
 
 <body>
-
-    <!-- ===== HEADER ===== -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-guinda shadow-sm">
             <div class="container">
@@ -35,19 +49,14 @@
         </nav>
     </header>
 
-    <!-- ===== CONTENIDO ===== -->
     <main class="container my-5">
-
         <div class="row justify-content-center">
             <div class="col-lg-9">
 
                 <div class="card card-registro p-4">
                     <h2 class="text-center mb-4">Registro de Nuevo Menor</h2>
 
-                    <!-- ===== FORM MENOR ===== -->
                     <form id="formMenorSolo" novalidate>
-
-                        <!-- Datos personales -->
                         <h5 class="mb-3">Datos del menor</h5>
 
                         <div class="row g-3">
@@ -114,7 +123,6 @@
                             </div>
                         </div>
 
-                        <!-- Dirección -->
                         <hr class="my-4">
                         <h5 class="mb-3">Dirección</h5>
 
@@ -220,7 +228,6 @@
                             </div>
                         </div>
 
-                        <!-- Asignación -->
                         <hr class="my-4">
                         <h5 class="mb-3">Asignación</h5>
 
@@ -244,7 +251,6 @@
                             </div>
                         </div>
 
-                        <!-- BOTONES -->
                         <div class="d-flex justify-content-between mt-4">
                             <a href="acceso.html" class="btn btn-outline-secondary">
                                 <i class="bi bi-x-circle me-1"></i>Cancelar
@@ -261,7 +267,6 @@
         </div>
     </main>
 
-    <!-- ===== MODAL ===== -->
     <div class="modal fade" id="modalDatos" tabindex="-1">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -280,7 +285,6 @@
         </div>
     </div>
 
-    <!-- ===== FOOTER ===== -->
     <footer class="mt-auto py-3">
         <div class="container text-center">
             <p class="mb-1">© 2025 TDAW - IPN - COCENDI</p>

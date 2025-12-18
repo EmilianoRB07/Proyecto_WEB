@@ -1,5 +1,13 @@
 <?php
 header("Content-Type: application/json; charset=utf-8");
+
+session_set_cookie_params([
+  "lifetime" => 0,
+  "path" => "/",         
+  "httponly" => true,
+  "samesite" => "Lax"
+]);
+
 session_start();
 
 // conexión
@@ -55,6 +63,33 @@ if ($action === "login") {
   $_SESSION["correo_inst"] = $t["correo_inst"];
 
   // traer menores del trabajador
+  $stmt2 = $pdo->prepare("
+    SELECT
+      apP, apM, nombre, curp, genero, fecha_nac,
+      grupo_asignado, cendi,
+      entidad, municipio, colonia, calle, numero, cp, telefono, grupo_sanguineo
+    FROM menor
+    WHERE trabajador_id = ?
+    ORDER BY creado_en DESC
+  ");
+  $stmt2->execute([$_SESSION["trabajador_id"]]);
+  $menores = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+  echo json_encode([
+    "ok" => true,
+    "correo" => $_SESSION["correo_inst"],
+    "menores" => $menores
+  ]);
+  exit;
+}
+
+if ($action === "status") {
+  if (!isset($_SESSION["trabajador_id"])) {
+    echo json_encode(["ok" => false, "msg" => "No hay sesión"]);
+    exit;
+  }
+
+  // traer menores del trabajador (igual que en login)
   $stmt2 = $pdo->prepare("
     SELECT
       apP, apM, nombre, curp, genero, fecha_nac,

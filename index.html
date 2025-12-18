@@ -5,125 +5,151 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CENDI - Inicio</title>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <link href="css/estilos.css" rel="stylesheet">
   <link rel="icon" href="img/logo_tiburon_mamado-removebg-preview.png" type="image/png">
 </head>
 
+<body class="bg-pattern">
+
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-guinda shadow-sm">
     <div class="container">
-      <a class="navbar-brand" href="https://www.ipn.mx" data-bs-toggle="tooltip">
-        <img src="img/ipnblack.png" alt="IPN" title="Pagina IPN">
+
+      <!-- IZQUIERDA: IPN (siempre) -->
+      <a class="navbar-brand" href="https://www.ipn.mx" data-bs-toggle="tooltip" title="Pagina IPN">
+        <img src="img/ipnblack.png" alt="IPN">
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+
+      <!-- DERECHA en móvil: toggler + tibu (solo < lg) -->
+      <div class="d-flex align-items-center ms-auto gap-2 d-lg-none">
+        <a href="index.html" class="navbar-brand p-0" data-bs-toggle="tooltip" title="Index">
+          <img src="img/tibu.png" alt="Logo Equipo" class="team-logo rounded-circle">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav"
+          aria-controls="menuNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <!-- MENÚ (colapsa en móvil, visible en lg+) -->
       <div class="collapse navbar-collapse" id="menuNav">
-        <ul class="navbar-nav ms-auto align-items-center flex-row">
-          <li class="nav-item"><a class="nav-link active" href="index.html"><i
-                class="bi bi-house-door-fill me-1"></i>Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="inscripcion.html"><i
-                class="bi bi-pencil-square me-1"></i>Inscripción</a></li>
-          <li class="nav-item"><a class="nav-link" href="admin.html"><i class="bi bi-gear-fill me-1"></i>Admin</a></li>
-          <li class="nav-item"><a class="nav-link" href="acceso.html"><i class="bi bi-person me-1"></i>Acceso</a></li>
-          <li class="nav-item ms-3">
-            <a href="index.html" class="nav-link p-0" data-bs-toggle="tooltip">
-              <img src="img/tibu.png" alt="Logo Equipo" class="team-logo rounded-circle" title="INDEX">
-            </a>
+        <ul class="navbar-nav mx-lg-auto align-items-lg-center flex-row gap-5 gap-lg-5">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html"><i class="bi bi-house-door-fill me-1"></i>Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="inscripcion.html"><i class="bi bi-pencil-square me-1"></i>Inscripción</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin.html"><i class="bi bi-gear-fill me-1"></i>Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="acceso.html"><i class="bi bi-person me-1"></i>Acceso</a>
           </li>
         </ul>
       </div>
+
+      <!-- DERECHA en pantalla grande: Tibu (solo >= lg) -->
+      <a href="index.html" class="navbar-brand p-0 ms-lg-auto d-none d-lg-block" data-bs-toggle="tooltip" title="Index">
+        <img src="img/tibu.png" alt="Logo Equipo" class="team-logo rounded-circle">
+      </a>
+
     </div>
   </nav>
 </header>
 
-<body class="bg-pattern">
-  <div class="carousel-container">
-    <div id="carouselNoticiasIPN" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
+  <main>
 
-        <div class="carousel-item active">
-          <a href="https://latinus.us/mexico/2025/11/19/meten-reversa-en-el-cendi-de-diputados-cancelan-clases-virtuales-para-menores-de-cinco-anos-157334.html"
-            target="_blank">
-            <img src="img/noticia1.jpg" class="d-block w-100" alt="Cancelan clases en el cendi">
-            <div class="carousel-caption bg-dark bg-opacity-50 rounded p-3">
-              <h5>Meten reversa en el CENDI de Diputados</h5>
-              <p>Cancelan clases virtuales para menores de cinco años</p>
-            </div>
-          </a>
-        </div>
+    <!-- ✅ CARRUSEL SOLO 3 SLIDES -->
+    <div class="carousel-container">
+      <div id="carouselNoticiasIPN" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
 
-        <div class="carousel-item ">
-          <a href="https://elsoberano.mx/2025/09/08/azcapotzalco-reinaugura-cendi-la-rosita-tras-anos-de-abandono/"
-            target="_blank">
-            <img src="img/noticia2.jpg" class="d-block w-100" alt="Reinaguracion cendi">
-            <div class="carousel-caption bg-dark bg-opacity-50 rounded p-3">
-              <h5>Reinaguración de CENDI</h5>
-              <p>Azcapotzalco reinaugura CENDI La Rosita tras años de abandono</p>
-            </div>
-          </a>
-        </div>
-
-        <div class="carousel-item ">
-          <a href="https://www.uat.edu.mx/noticias/Paginas/Noticia.aspx?nid=785" target="_blank">
-            <img src="img/noticia3.jpg" class="d-block w-100" alt="Aperturade CENDI">
-            <div class="carousel-caption bg-dark bg-opacity-50 rounded p-3">
-              <h5>Apertura de un nuevo CENDI</h5>
-              <p>La UAT y el IMSS abrirán un nuevo CENDI en Nuevo Laredo</p>
-            </div>
-          </a>
-        </div>
-
-
-        <div class="carousel-item">
-          <div class="slide-facebook-video d-flex">
-            <div class="slide-facebook">
-              <iframe
-                src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/IPN.MX/&tabs=timeline&width=500&height=630"
-                width="100%" height="100%" style="border:none;overflow:hidden;" scrolling="no" frameborder="0"
-                allowfullscreen></iframe>
-            </div>
-            <div class="slide-video-noticia">
-              <div class="video-youtube mb-3">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/GtlC2jQ84IM?si=ihG02nal1pclEzrt"
-                  title="YouTube video player" frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </iframe>
+          <div class="carousel-item active">
+            <a href="https://latinus.us/mexico/2025/11/19/meten-reversa-en-el-cendi-de-diputados-cancelan-clases-virtuales-para-menores-de-cinco-anos-157334.html" target="_blank">
+              <img src="img/noticia1.jpg" class="d-block w-100" alt="Cancelan clases en el cendi">
+              <div class="carousel-caption bg-dark bg-opacity-50 rounded p-3">
+                <h5>Meten reversa en el CENDI de Diputados</h5>
+                <p>Cancelan clases virtuales para menores de cinco años</p>
               </div>
-              <div class="noticia-escom">
-                <a href="https://www.escom.ipn.mx" target="_blank" class="card">
-                  <img src="img/escom.jpg" class="card-img-top" alt="ESCOM IPN">
-                  <div class="card-body">
-                    <h5 class="card-title">Visita nuestra página oficial</h5>
-                    <p>Explora todo sobre la Escuela Superior de Cómputo del IPN.</p>
-                  </div>
-                </a>
-              </div>
-            </div>
+            </a>
           </div>
+
+          <div class="carousel-item">
+            <a href="https://elsoberano.mx/2025/09/08/azcapotzalco-reinaugura-cendi-la-rosita-tras-anos-de-abandono/" target="_blank">
+              <img src="img/noticia2.jpg" class="d-block w-100" alt="Reinaguracion cendi">
+              <div class="carousel-caption bg-dark bg-opacity-50 rounded p-3">
+                <h5>Reinaguración de CENDI</h5>
+                <p>Azcapotzalco reinaugura CENDI La Rosita tras años de abandono</p>
+              </div>
+            </a>
+          </div>
+
+          <div class="carousel-item">
+            <a href="https://www.uat.edu.mx/noticias/Paginas/Noticia.aspx?nid=785" target="_blank">
+              <img src="img/noticia3.jpg" class="d-block w-100" alt="Aperturade CENDI">
+              <div class="carousel-caption bg-dark bg-opacity-50 rounded p-3">
+                <h5>Apertura de un nuevo CENDI</h5>
+                <p>La UAT y el IMSS abrirán un nuevo CENDI en Nuevo Laredo</p>
+              </div>
+            </a>
+          </div>
+
         </div>
 
-      </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselNoticiasIPN" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
 
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselNoticiasIPN" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Anterior</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselNoticiasIPN" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Siguiente</span>
-      </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselNoticiasIPN" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </button>
+      </div>
     </div>
-  </div>
+
+    <section class="container my-4">
+      <div class="slide-facebook-video">
+        <div class="slide-facebook">
+          <iframe
+            src="https://www.facebook.com/plugins/page.php?href=https://www.facebook.com/IPN.MX/&tabs=timeline&width=500&height=630"
+            style="border:none;overflow:hidden;" scrolling="no" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="slide-video-noticia">
+          <div class="video-youtube">
+            <iframe
+              src="https://www.youtube.com/embed/GtlC2jQ84IM?si=ihG02nal1pclEzrt"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+
+          <div class="noticia-escom">
+            <a href="https://www.escom.ipn.mx" target="_blank" class="card">
+              <img src="img/escom.jpg" class="card-img-top" alt="ESCOM IPN">
+              <div class="card-body">
+                <h5 class="card-title">Visita nuestra página oficial</h5>
+                <p>Explora todo sobre la Escuela Superior de Cómputo del IPN.</p>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
 
   <footer class="mt-auto py-3">
-
     <div id="img1">
       <a href="https://www.gob.mx" data-bs-toggle="tooltip">
-      <img src="https://framework-gb.cdn.gob.mx/gobmx/img/logo_blanco.svg" alt="Gobierno de México" title="Pagina GOB MX">
+        <img src="https://framework-gb.cdn.gob.mx/gobmx/img/logo_blanco.svg" alt="Gobierno de México" title="Pagina GOB MX">
       </a>
     </div>
 
@@ -133,10 +159,9 @@
 
     <div id="img2">
       <a href="https://www.ipn.mx/cocendi/" data-bs-toggle="tooltip">
-      <img src="img/logoCENDI.png" alt="COCENDI LOGO" title="Pagina COCENDI">
+        <img src="img/logoCENDI.png" alt="COCENDI LOGO" title="Pagina COCENDI">
       </a>
     </div>
-
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>

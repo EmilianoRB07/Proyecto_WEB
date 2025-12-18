@@ -215,7 +215,7 @@ document.addEventListener("click", async (e) => {
   const m = payloadMenor();
 
   try {
-    const resp = await fetch("php/nuevo_menor.php", {
+    const resp = await fetch("php/nuevo_menor_api.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "same-origin", // IMPORTANTÍSIMO para sesión

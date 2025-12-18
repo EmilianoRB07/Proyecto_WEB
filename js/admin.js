@@ -106,14 +106,16 @@ function renderTable(items) {
       <td>${escapeHTML(r.trabajador || "")}</td>
       <td>${escapeHTML(r.correo_trabajador || "")}</td>
       <td class="small text-muted">${escapeHTML(r.created_at || "")}</td>
-      <td class="text-end">
-        <button class="btn btn-sm btn-outline-primary me-1" data-action="edit" data-id="${r.id}">
-          <i class="bi bi-pencil-square"></i>
-        </button>
-        <button class="btn btn-sm btn-outline-danger" data-action="del" data-id="${r.id}">
-          <i class="bi bi-trash"></i>
-        </button>
-      </td>
+<td class="text-end">
+  <div class="d-inline-flex gap-2">
+    <button class="btn btn-sm btn-outline-primary btn-icon" data-action="edit" data-id="${r.id}">
+      <i class="bi bi-pencil-square"></i>
+    </button>
+    <button class="btn btn-sm btn-outline-danger btn-icon" data-action="del" data-id="${r.id}">
+      <i class="bi bi-trash"></i>
+    </button>
+  </div>
+</td>
     </tr>
   `).join("");
 }
@@ -137,13 +139,13 @@ if (togglePass) {
 // Login
 formLogin.addEventListener("submit", async (e) => {
   e.preventDefault();
-    console.log("submit capturado ✅");   // 👈 añade esto
+  console.log("submit capturado ✅"); 
 
   const usuario = (usuarioEl.value || "").trim();
   const pass = (passEl.value || "");
 
   const r = await api("login", { usuario, pass });
-    console.log("respuesta login:", r);  // 👈 y este también
+  console.log("respuesta login:", r); 
 
   if (!r.ok) return alert(r.msg || "No se pudo iniciar sesión");
 

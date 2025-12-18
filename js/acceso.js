@@ -1,18 +1,6 @@
-// ===== Tooltips (por si los usas) =====
-document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
-  new bootstrap.Tooltip(el);
-});
-
-// ===== Mostrar / ocultar contraseña =====
-const toggle = document.getElementById("togglePass");
-if (toggle) {
-  toggle.addEventListener("click", () => {
-    const input = document.getElementById("password-p");
-    if (!input) return;
-    input.type = (input.type === "password") ? "text" : "password";
-    toggle.classList.toggle("bi-eye-slash-fill");
-  });
-}
+// ✅ IMPORTANTE: usa rutas ABSOLUTAS para que NO falle dependiendo desde dónde vengas
+// Cambia "cendi" por el nombre real de tu carpeta en htdocs si es diferente.
+const API_ACCESO = "./php/acceso.php";
 
 // ===== Referencias =====
 const formLogin = document.getElementById("formLogin");
@@ -20,7 +8,6 @@ const cardLogin = document.getElementById("cardLogin");
 const panelDatos = document.getElementById("panelDatos");
 const textoUsuario = document.getElementById("textoUsuario");
 const listaMenores = document.getElementById("listaMenores");
-
 const btnAcuse = document.getElementById("btnAcuse");
 const btnCerrar = document.getElementById("btnCerrar");
 
@@ -33,7 +20,6 @@ function setInvalid(el, msg = "") {
     if (fb) fb.textContent = msg;
   }
 }
-
 function clearInvalid(el) {
   if (!el) return;
   el.classList.remove("is-invalid");
@@ -52,7 +38,6 @@ function renderMenores(menores) {
   }
 
   let html = "";
-
   menores.forEach((m, i) => {
     html += `
       <div class="border rounded p-3 mb-3">
@@ -75,16 +60,12 @@ function renderMenores(menores) {
 
           <div class="col-md-6">
             <strong>CENDI:</strong>
-            <span style="background: #ffe066; padding: 2px 6px; border-radius: 6px;">
-              ${m.cendi}
-            </span>
+            <span style="background:#ffe066; padding:2px 6px; border-radius:6px;">${m.cendi}</span>
           </div>
 
           <div class="col-md-6">
             <strong>Grupo asignado:</strong>
-            <span style="background: #ffe066; padding: 2px 6px; border-radius: 6px;">
-              ${m.grupo_asignado}
-            </span>
+            <span style="background:#ffe066; padding:2px 6px; border-radius:6px;">${m.grupo_asignado}</span>
           </div>
         </div>
       </div>
@@ -93,6 +74,63 @@ function renderMenores(menores) {
 
   listaMenores.innerHTML = html;
 }
+
+async function restaurarSesion() {
+  try {
+    const resp = await fetch(API_ACCESO, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin",
+      body: JSON.stringify({ action: "status" })
+    });
+
+    const result = await resp.json();
+
+    if (result.ok) {
+      textoUsuario.textContent = `Sesión iniciada como: ${result.correo}`;
+      renderMenores(result.menores);
+
+      cardLogin.classList.add("d-none");
+      panelDatos.classList.remove("d-none");
+    } else {
+      panelDatos.classList.add("d-none");
+      cardLogin.classList.remove("d-none");
+    }
+  } catch (e) {
+    console.warn("No se pudo restaurar sesión", e);
+  }
+}
+
+// ✅ Todo lo que depende de bootstrap/DOM aquí adentro
+document.addEventListener("DOMContentLoaded", () => {
+
+  // Tooltips
+  document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+    new bootstrap.Tooltip(el);
+  });
+
+  // Toggle pass
+  const toggle = document.getElementById("togglePass");
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      const input = document.getElementById("password-p");
+      if (!input) return;
+      input.type = (input.type === "password") ? "text" : "password";
+      toggle.classList.toggle("bi-eye-slash-fill");
+    });
+  }
+
+  // Restaurar sesión al cargar
+  restaurarSesion();
+});
+
+// Back/forward cache
+window.addEventListener("pageshow", restaurarSesion);
+
+// Cuando vuelves a la pestaña
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) restaurarSesion();
+});
 
 // ===== Login AJAX =====
 if (formLogin) {
@@ -108,34 +146,20 @@ if (formLogin) {
     const correo = (correoEl?.value || "").trim().toLowerCase();
     const pass = (passEl?.value || "");
 
-    if (!correo) {
-      setInvalid(correoEl, "Ingresa un correo válido.");
-      return;
-    }
-    if (!pass) {
-      setInvalid(passEl, "Ingresa la contraseña.");
-      return;
-    }
+    if (!correo) return setInvalid(correoEl, "Ingresa un correo válido.");
+    if (!pass) return setInvalid(passEl, "Ingresa la contraseña.");
 
     try {
-      const resp = await fetch("./php/acceso.php", {
+      const resp = await fetch(API_ACCESO, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "login",
-          correo,
-          pass
-        })
+        credentials: "same-origin",
+        body: JSON.stringify({ action: "login", correo, pass })
       });
 
       const result = await resp.json();
+      if (!result.ok) return alert(result.msg || "No se pudo iniciar sesión");
 
-      if (!result.ok) {
-        alert(result.msg || "No se pudo iniciar sesión");
-        return;
-      }
-
-      // UI
       textoUsuario.textContent = `Sesión iniciada como: ${result.correo}`;
       renderMenores(result.menores);
 
@@ -148,36 +172,18 @@ if (formLogin) {
   });
 }
 
-// ===== Generar PDF (Acuse) =====
-if (btnAcuse) {
-  btnAcuse.addEventListener("click", () => {
-    const area = document.getElementById("areaAcuse");
-    if (!area) return;
-
-    const opt = {
-      margin: 10,
-      filename: "acuse_cendi.pdf",
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true },
-      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
-    };
-
-    html2pdf().set(opt).from(area).save();
-  });
-}
-
 // ===== Cerrar sesión =====
 if (btnCerrar) {
   btnCerrar.addEventListener("click", async () => {
     try {
-      await fetch("./php/acceso.php", {
+      await fetch(API_ACCESO, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
         body: JSON.stringify({ action: "logout" })
       });
     } catch (e) {}
 
-    // UI reset
     panelDatos.classList.add("d-none");
     cardLogin.classList.remove("d-none");
     formLogin?.reset();
